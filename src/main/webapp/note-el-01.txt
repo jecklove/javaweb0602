@@ -1,0 +1,55 @@
+JSP：
+		16.EL表达式
+			1.简介：jsp的内置表达式语言，从jsp2.0开始，用来替代<%=...%>输出表达式。
+			2.作用：
+				1.执行运算*
+				2.获取java对象中的数据*
+				3.获取域中的数据*
+				4.获取常见的jsp内置对象
+				5.调用javabean的方法
+			3.格式：${el表达式主体}
+			
+			4.执行运算：
+				四则运算、关系运算、逻辑运算
+				注意：+号不能进行字符串拼接，可以进行数字字符串的运算。
+			5.获取java对象的数据：
+				注意：
+					1.java对象需要在域中
+					2.获取对象属性直接.属性名即可，无论是否是public的属性
+			6.获取域中的数据：
+				注意：
+					1.通过${域中属性名}方式获取值，作用域范围越小优先级越高。
+					2.可以使用el表达式内置对象获取指定域中的数据：
+						${ 域内置对象["域中属性名"] }
+						${ 域内置对象.域中属性名 }
+					
+			7.EL表达式内置对象(11个)
+				四大作用域内置对象*：
+					pageScope：类似jsp内置对象pageContext
+					requestScope：类似jsp内置对象request
+					sessionScope：类似jsp内置对象session
+					applicationScope：类似jsp内置对象application
+				
+				其他内置对象*：
+					cookie：${ cookie.cookie的name.value }
+					pageContext：可以获取其他的jsp内置对象
+						获取项目根路径：${ pageContext.request.contextPath }
+					
+				请求参数相关内置对象：
+					param
+					paramValues
+					
+				请求头相关内置对象：
+					header
+					headerValues
+				
+				初始化参数相关内置对象：
+					initParam
+				
+				
+				
+				
+				
+				
+					
+					

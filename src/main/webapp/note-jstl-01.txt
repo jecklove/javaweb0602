@@ -1,0 +1,71 @@
+JSTL：
+	1.简介：是一个符合jsp标准的标签库语言，apache的开源项目。
+	2.作用：用于代替java脚本，和el表达式联合使用。
+	3.使用步骤：
+		1.引入依赖：jstl.jar  standard.jar
+		2.在页面上导入标签库并声明前缀
+			<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+			
+	4.标签库分类
+		1.core：核心类库
+		2.fmt：格式化类库
+		3.xml：过时
+		4.sql：过时
+		5.funcitons：函数库，使用很少
+		
+	5.核心类库
+		c:if 判断：
+			<c:if test="${el表达式}">满足表达式时输出的内容</c:if>
+		
+		c:forEach 循环：
+			<c:forEach begin="1" end="10" step="2" var="i" varStatus="vs">
+				${ i }--${ vs.count }--${ vs.current }<br>
+			</c:forEach>
+			注意：
+				1.vs.count获取序号，计数器。
+				2.vs.current获取当前遍历到的内容，和var一致
+				
+			<c:forEach items="${ names }" var="name" varStatus="vs">
+				${ vs.count }--${ name }<br>
+			</c:forEach>
+			注意：
+				1.names必须是域中的数据
+				2.判断集合names是否为空，可以使用${empty names}，判断是null或者容量为0
+		
+		c:set 向域中设置属性：
+			<c:set var="var1" value="value1" scope="session" />
+			
+			实践：将项目根路径动态设置到域中，起一个简短的变量名用于全局使用。
+				解决：1.页面转发，静态资源地址错误的问题。2.项目根路径改变导致访问地址错误。
+				1.转发：地址以“/”开头，例如“/user/login.jsp”，转发真实地址“http://localhost:8080/javaweb200324mvn/user/login.jsp”
+				2.重定向：地址以“/”开头，例如“/user/login.jsp”，真实地址“http://localhost:8080/user/login.jsp”
+					需要在“/user/login.jsp”前加上项目根路径。
+					通过request.getContextPath()实现。
+				3.静态资源：地址以“/”开头，例如“/static/css01.css”，真实地址“http://localhost:8080/static/css01.css”
+					需要在“/static/css01.css”前加上项目根路径。
+					通过el表达式实现。
+					
+		c:choose 判断：
+				<c:choose>
+					<c:when test="${ week == 1 }">
+						周一睡觉
+					</c:when>
+					<c:when test="${ week == 2 }">
+						周二打游戏
+					</c:when>
+					<c:otherwise>
+						周三到周末敲代码
+					</c:otherwise>
+				</c:choose>
+				
+	6.格式化类库
+		引入标签库：<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>	
+		
+		数字格式化，保留两位小数：
+		<fmt:formatNumber type="number" value="${ 10.0 / 3 }" pattern="#.00"/>
+		
+		日期格式化：
+		<fmt:formatDate value="${ now }" pattern="yyyy-MM-dd HH:mm:ss.SSS"/>
+		
+			
+			
